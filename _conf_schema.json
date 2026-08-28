@@ -1,0 +1,90 @@
+{
+  "enabled": {
+    "description": "启用赞助回复",
+    "type": "bool",
+    "default": true,
+    "hint": "关闭后本插件不处理任何消息。"
+  },
+  "keyword_notice_enabled": {
+    "description": "提到赞助时发送提示",
+    "type": "bool",
+    "default": true,
+    "hint": "例如：我想赞助、支持一下赞助。只发文字提示，不发二维码。"
+  },
+  "qr_commands_enabled": {
+    "description": "允许发送二维码",
+    "type": "bool",
+    "default": true,
+    "hint": "只有完整输入微信或支付宝指令时才发送对应二维码。"
+  },
+  "mention_sender": {
+    "description": "提示时@发送者",
+    "type": "bool",
+    "default": true,
+    "hint": "仅群聊生效，私聊不会发送@。"
+  },
+  "cooldown_seconds": {
+    "description": "同群提示冷却时间（秒）",
+    "type": "int",
+    "default": 10,
+    "slider": {"min": 0, "max": 300, "step": 1},
+    "hint": "防止群里连续提到赞助时重复刷屏，0表示不限制。"
+  },
+  "keyword": {
+    "description": "普通触发词",
+    "type": "string",
+    "default": "赞助",
+    "hint": "普通消息中包含这个词时触发提示。"
+  },
+  "llm_wake_prefixes": {
+    "description": "忽略的机器人唤醒词",
+    "type": "string",
+    "default": "萝卜",
+    "hint": "以这些词开头的群聊消息交给主机器人回答，不触发赞助功能；多个词用英文逗号分隔。"
+  },
+  "wechat_command": {
+    "description": "微信二维码指令",
+    "type": "string",
+    "default": "赞助微信",
+    "hint": "必须完整输入才会发送微信二维码。"
+  },
+  "wechat_image_path": {
+    "description": "微信发送图片路径",
+    "type": "file",
+    "default": [],
+    "file_types": ["jpg", "jpeg", "png", "webp"],
+    "hint": "直接上传微信二维码。上传后自动使用第一张；公开版不附带二维码，未上传时不会发送图片。"
+  },
+  "alipay_command": {
+    "description": "支付宝二维码指令",
+    "type": "string",
+    "default": "赞助支付宝",
+    "hint": "必须完整输入才会发送支付宝二维码。"
+  },
+  "alipay_image_path": {
+    "description": "支付宝发送图片路径",
+    "type": "file",
+    "default": [],
+    "file_types": ["jpg", "jpeg", "png", "webp"],
+    "hint": "直接上传支付宝二维码。上传后自动使用第一张；公开版不附带二维码，未上传时不会发送图片。"
+  },
+  "custom_command": {
+    "description": "自定义图片指令",
+    "type": "string",
+    "default": "",
+    "hint": "例如填“赞助爱发电”。留空则不启用自定义图片。"
+  },
+  "custom_image_path": {
+    "description": "自定义指令发送图片路径",
+    "type": "file",
+    "default": [],
+    "file_types": ["jpg", "jpeg", "png", "webp"],
+    "hint": "直接上传自定义指令对应图片。必须同时填写自定义图片指令；上传后自动使用第一张。"
+  },
+  "notice_text": {
+    "description": "普通提及赞助时的提示文字",
+    "type": "string",
+    "default": "请回复“赞助微信”或“赞助支付宝”",
+    "hint": "只会发送文字，不会发送二维码。"
+  }
+}
