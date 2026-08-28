@@ -1,0 +1,7 @@
+name: astrbot_plugin_sponsor
+display_name: 赞助回复
+desc: 赞助关键词提示与微信、支付宝二维码回复
+version: v1.4.0
+author: Luobp1
+repo: https://github.com/luobp1/astrbot_plugin_sponsor
+astrbot_version: ">=4.13.0"
