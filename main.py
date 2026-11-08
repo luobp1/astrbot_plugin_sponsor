@@ -60,6 +60,11 @@ class SponsorPlugin(Star):
                 self.image_replies[self.custom_command] = custom_image_path
         logger.info("赞助回复插件已加载")
 
+    @staticmethod
+    def _normalize_command(message: str) -> str:
+        """兼容群聊里常见的空格和结尾标点，但不做模糊关键词匹配。"""
+        return message.strip().rstrip("。！!？?，, ").replace(" ", "")
+
     def _resolve_image_path(self, config_key: str, default_name: str) -> str:
         configured_value = self.config.get(config_key, "")
         if isinstance(configured_value, list):
@@ -103,11 +108,15 @@ class SponsorPlugin(Star):
         ):
             return
 
-        if self.qr_commands_enabled and original in self.image_replies:
-            image_path = self.image_replies[original]
+        command = self._normalize_command(original)
+        if self.qr_commands_enabled and command in self.image_replies:
+            image_path = self.image_replies[command]
             if not os.path.isfile(image_path):
-                logger.warning(f"图片不存在: {image_path}")
+                logger.warning("赞助图片不存在，指令=%s，路径=%s", command, image_path)
+                yield event.plain_result("赞助图片暂未配置，请联系管理员。")
                 return
+
+            # 二维码必须单独发送。部分 OneBot/NapCat 环境会在“@ + 图片”混合消息上超时。
             yield event.chain_result([
                 Comp.Image.fromFileSystem(path=image_path)
             ])
